@@ -1,7 +1,9 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from hospitals import database
 
 app = Flask(__name__)
+CORS(app)
 
 
 def parse_blood(bloodgroup):
