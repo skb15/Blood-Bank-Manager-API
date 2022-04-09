@@ -1,7 +1,9 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from hospitals import database
 
 app = Flask(__name__)
+CORS(app)
 
 
 def parse_blood(bloodgroup):
@@ -36,7 +38,7 @@ def hospitals():
 
             for compatible_bloodgroup in compatible_bloodgroups:
                 group, rh = parse_blood(compatible_bloodgroup)
-                if hospital["stock"][group][rh] > 0:
+                if hospital["stocks"][group][rh] > 0:
                     return True
 
             return False
