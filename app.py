@@ -18,6 +18,20 @@ def hospitals():
     db = database[:]
     query = request.args
 
+    # Filteration by name
+    if query.get("name") != None:
+        name = query.get("name").lower()
+
+        def filter_by_name(hospital):
+            words = hospital["name"].lower().split(" ")
+
+            for word in name.split(" "):
+                if word not in words:
+                    return False
+
+            return True
+        db = [h for h in filter(filter_by_name, db)]
+
     # Filtering
     if query.get("bloodGroup") != None:
         bloodgroup = query.get("bloodGroup")
