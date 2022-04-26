@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from hospitals import database
+import re
 
 app = Flask(__name__)
 CORS(app)
@@ -23,7 +24,8 @@ def hospitals():
         name = query.get("name").lower()
 
         def filter_by_name(hospital):
-            words = hospital["name"].lower().split(" ")
+            unformattedwords = hospital["name"].lower()
+            words = re.sub("[^a-z]+", " ", unformattedwords).strip()
 
             for word in name.split(" "):
                 if word not in words:
