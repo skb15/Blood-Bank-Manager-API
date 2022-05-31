@@ -14,7 +14,14 @@ def parse_blood(bloodgroup):
     return (group, rh)
 
 
-@app.route('/hospitals')
+@app.route('/hospitals/<id>', methods=['PUT'])
+def hospital(id):
+    if request.method == "PUT":
+        # database.
+        return id
+
+
+@app.route('/hospitals', methods=['GET'])
 def hospitals():
     db = database[:]
     query = request.args
