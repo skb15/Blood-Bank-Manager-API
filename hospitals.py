@@ -1,4 +1,4 @@
-database = [
+hospitalDB = [
     {
         "id": 1,
         "tags": ["govt", "verified"],
